@@ -7,13 +7,11 @@ import MoviesList from './screens/MoviesList';
 import Timings from './screens/Timings';
 import PickSeats from './screens/PickSeats';
 import TicketSuccess from './screens/TicketSuccess';
-
 const Stack = createNativeStackNavigator();
-
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="City" component={CityList} />
         <Stack.Screen name="Movies" component={MoviesList} />
