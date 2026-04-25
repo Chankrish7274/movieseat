@@ -1,7 +1,9 @@
-import React, { useEffect, useRef } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Animated, SafeAreaView, Image } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Animated, SafeAreaView, Image, Alert } from 'react-native';
 export default function Login({ navigation }) {
   const fadeAnim = useRef(new Animated.Value(0)).current;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   useEffect(() => { Animated.timing(fadeAnim, { toValue: 1, duration: 2000, useNativeDriver: true }).start(); }, [fadeAnim]);
   return (
     <SafeAreaView style={styles.container}>
@@ -10,9 +12,12 @@ export default function Login({ navigation }) {
         <Text style={styles.subText}>Book your tickets instantly</Text>
       </Animated.View>
       <View style={{ width: '100%' }}>
-        <TextInput style={styles.input} placeholder="Email Address" keyboardType="email-address" />
-        <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} />
-        <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.replace("City")}>
+        <TextInput style={styles.input} placeholder="Email Address" keyboardType="email-address" value={email} onChangeText={setEmail} />
+        <TextInput style={styles.input} placeholder="Password" secureTextEntry={true} value={password} onChangeText={setPassword} />
+        <TouchableOpacity style={styles.loginBtn} onPress={() => {
+          if(!email || !password) return Alert.alert("Missing Fields", "Please enter your email and password.");
+          navigation.replace("City");
+        }}>
           <Text style={styles.loginBtnText}>Login to Continue</Text>
         </TouchableOpacity>
       </View>

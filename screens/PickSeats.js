@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, ScrollView, Alert } from 'react-native';
 export default function PickSeats({ route, navigation }) {
   const { cityName, movie, date, theater, time } = route.params;
   const [sel, setSel] = useState([]);
@@ -35,7 +35,7 @@ export default function PickSeats({ route, navigation }) {
       <View style={styles.footer}>
         <View><Text style={styles.tLabel}>Total Price</Text><Text style={styles.tPrice}>₹ {sel.length * 200}</Text></View>
         <TouchableOpacity style={styles.btn} onPress={() => {
-          if (!sel.length) return alert("Select a seat");
+          if (!sel.length) return Alert.alert("Hold On!", "Please select at least one seat.");
           navigation.navigate("Confirmation", { ...route.params, selectedSeats: sel, total: sel.length * 200 });
         }}><Text style={styles.btnTxt}>Continue</Text></TouchableOpacity>
       </View>
